@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "172322039058",
+    "project_id": "weighty-rookery-292308",
+    "storage_bucket": "weighty-rookery-292308.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172322039058:android:3134d736de6fad81067fcb",
+        "android_client_info": {
+          "package_name": "com.animesafar.dinterviewkit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172322039058-hpnl4p0g4p5bqhi0mo170tpct02b7ao4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNm3ifoTT00to2HOpe19V3TrH2596guIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172322039058-hpnl4p0g4p5bqhi0mo170tpct02b7ao4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
