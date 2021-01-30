@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.animesafar.dinterviewkit">
 
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
-    <uses-feature android:name="android.hardware.Camera.any"></uses-feature>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.Camera.any" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dinterviewkit">
-        <meta-data android:name="com.google.firebase.ml.vision.DEPENDENCIES" android:value="face"></meta-data>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Chooseractivity"></activity>
+        <activity android:name=".datapackage.Allrecodings" />
+        <activity android:name=".Questionslist" />
+        <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="face" />
+
+        <activity android:name=".Landingpage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

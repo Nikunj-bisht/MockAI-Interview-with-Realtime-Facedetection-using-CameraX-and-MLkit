@@ -7,11 +7,16 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
 
+import com.google.firebase.ml.vision.face.FirebaseVisionFace;
+import com.google.firebase.ml.vision.face.FirebaseVisionFaceLandmark;
+
 public class Drawlayeraroundface extends View {
 
     private Paint paint;
     Context context;
     Rect rect;
+    FirebaseVisionFace firebaseVisionFace;
+    float a,b;
 
     private   void init(){
 
@@ -27,7 +32,14 @@ public class Drawlayeraroundface extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-         canvas.drawRect((float) rect.left ,rect.top ,rect.right,rect.bottom,paint);
+//        canvas.drawCircle(firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.LEFT_EYE).getPosition().getX(),firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.LEFT_EYE).getPosition().getY(),4,paint);
+//        canvas.drawCircle(firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.NOSE_BASE).getPosition().getX(),firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.NOSE_BASE).getPosition().getY(),4,paint);
+//        canvas.drawCircle(firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.LEFT_CHEEK).getPosition().getX(),firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.RIGHT_CHEEK).getPosition().getY(),4,paint);
+//
+//
+
+
+            canvas.drawRect((float) rect.left ,(float) rect.top ,(float)rect.right,(float)rect.bottom,paint);
 
     }
 
