@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grad"
+    android:background="@drawable/grad3"
     tools:context=".Chooseractivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,8 +20,28 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="179dp"
+        android:layout_marginTop="82dp"
         android:layout_marginEnd="184dp"
         android:layout_marginBottom="411dp"
+        android:foregroundGravity="clip_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="3dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8549163288628134/7129210431"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></com.google.android.gms.ads.AdView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    ca-app-pub-8549163288628134/7129210431-->

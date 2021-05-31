@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
@@ -23,7 +24,7 @@ public class Drawlayeraroundface extends View {
 
         paint = new Paint();
         paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(10f);
+        paint.setStrokeWidth(7f);
         paint.setStyle(Paint.Style.STROKE);
 
     }
@@ -38,7 +39,7 @@ public class Drawlayeraroundface extends View {
 //
 //
 
-
+        Log.d("coo" , rect.left+" ");
             canvas.drawRect((float) rect.left ,(float) rect.top ,(float)rect.right,(float)rect.bottom,paint);
 
     }

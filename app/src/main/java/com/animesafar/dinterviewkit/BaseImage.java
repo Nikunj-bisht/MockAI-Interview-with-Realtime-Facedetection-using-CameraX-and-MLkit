@@ -62,7 +62,7 @@ this.textView = textView;
     public void analyze(@NonNull ImageProxy image) {
 
        Image n =  image.getImage();
-        Log.d("RAn analyzer ------------------->>>>>>>>>>" ,"Ran");
+      //  Log.d("RAn analyzer ------------------->>>>>>>>>>" ,"Ran");
 
 
       FirebaseVisionFaceDetectorOptions a =    new FirebaseVisionFaceDetectorOptions.Builder().setPerformanceMode(FirebaseVisionFaceDetectorOptions.FAST)
@@ -90,7 +90,7 @@ this.textView = textView;
           @Override
           public void onSuccess(List<FirebaseVisionFace> firebaseVisionFaces) {
 
-              Log.d("Got values ------------------->>>>>>>>>>" , firebaseVisionFaces.toString());
+            //  Log.d("Got values ------------------->>>>>>>>>>" , firebaseVisionFaces.toString());
 
               if(!firebaseVisionFaces.isEmpty()){
 
@@ -120,7 +120,7 @@ if(rootview.getChildCount()>1){
 
 
 
-    Log.d("Head down figures------->>>>" ,Math.sqrt(x + y) +" "+ ((0.125) * (firebaseVisionFace.getBoundingBox().width()*1.5)));
+   // Log.d("Head down figures------->>>>" ,Math.sqrt(x + y) +" "+ ((0.125) * (firebaseVisionFace.getBoundingBox().width()*1.5)));
 
       if(Math.sqrt(x + y) < ((0.111) * (firebaseVisionFace.getBoundingBox().width()*1.5))){
 
@@ -131,19 +131,13 @@ if(rootview.getChildCount()>1){
       }
 
 
-    if(firebaseVisionFace.getHeadEulerAngleY() < -20){
-        textView.setText("Left cheek");
+    if(firebaseVisionFace.getHeadEulerAngleY() < -20 || firebaseVisionFace.getHeadEulerAngleY() >20){
+        textView.setText("look straight");
 
         // left = false;
 
     }
 
-    if(firebaseVisionFace.getHeadEulerAngleY() >20){
-        textView.setText("Right cheek");
-
-        // left = false;
-
-    }
 //    if(firebaseVisionFace.getHeadEulerAngleZ() > 4){
 //
 //
@@ -153,18 +147,13 @@ if(rootview.getChildCount()>1){
 //
 //
 //    }
-    if(firebaseVisionFace.getSmilingProbability()>0.8){
+    if(firebaseVisionFace.getSmilingProbability()>0.6){
 
         textView.setText("Happy face");
        // textToSpeech.speak("dont laugh too much",TextToSpeech.QUEUE_FLUSH,null,null);
 
 //        smile = false;
     }
-
-
-
-
-
 
 
     View view1 =  new Drawlayeraroundface(context,firebaseVisionFace.getBoundingBox());

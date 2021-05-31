@@ -1,6 +1,7 @@
 package com.animesafar.dinterviewkit.datapackage;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ this.sele = s;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+button.setBackgroundColor(Color.GREEN);
                 sele.onselected(i);
 
             }

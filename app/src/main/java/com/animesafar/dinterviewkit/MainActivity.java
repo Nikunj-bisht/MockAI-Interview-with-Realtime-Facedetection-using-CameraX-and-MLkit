@@ -21,18 +21,28 @@ import androidx.lifecycle.LifecycleOwner;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.ImageReader;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.Voice;
+import android.util.Log;
 import android.util.Size;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.animesafar.dinterviewkit.Recycler.Jobs;
@@ -65,10 +75,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     File file ;
     Activity activity;
     String ques;
-    Button button;
-    Button again;
-    Button butt;
+    ImageButton again;
+    ImageButton butt;
     ArrayList<Jobs> arrayList;
+    ArrayList<String> questions;
+    Chronometer chronometer;
+    ArrayAdapter arrayAdapter;
+    Spinner spinner;
+
+int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,19 +92,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide();
 previewView = findViewById(R.id.pv);
 view = findViewById(R.id.conlay);
-button = findViewById(R.id.sr);
 floatingActionButton = findViewById(R.id.floatingActionButton2);
 again = findViewById(R.id.aa);
 again.setOnClickListener(this);
 floatingActionButton.setOnClickListener(this);
-button.setOnClickListener(this);
-
+spinner = super.findViewById(R.id.spinner);
 butt = findViewById(R.id.next);
 butt.setOnClickListener(this);
-
+chronometer = findViewById(R.id.chrono);
 activity = this;
 file = activity.getExternalFilesDir("Recordings");
+questions = new ArrayList<String>();
+
 arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
+counter = arrayList.size();
 //ques = getIntent().getStringExtra("ques");
 
 //value = getIntent().getIntExtra("Values",0);
@@ -100,10 +116,44 @@ arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
 //
 //                textToSpeech.setVoice(new Voice("en"));
                 textToSpeech.setLanguage(Locale.ENGLISH);
+
+                Log.d("--->",textToSpeech.getEngines().toString());
+                textToSpeech.setSpeechRate(1.0f);
+                float pitch=0.0f;
+                try {
+               pitch =  Settings.Secure.getFloat(getContentResolver(),Settings.Secure.TTS_DEFAULT_PITCH);
+                } catch (Settings.SettingNotFoundException e) {
+                    e.printStackTrace();
+                }
+                textToSpeech.setPitch(0.87865643f);
                 new Speakerthread().start();
 
             }
         });
+
+         for(Jobs jobs : arrayList){
+
+             questions.add(jobs.getDescription());
+
+         }
+        arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,questions);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                textToSpeech.speak(questions.get(i),TextToSpeech.QUEUE_ADD,null,null);
+Toast.makeText(getApplicationContext(),"Cl",Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinner.setAdapter(arrayAdapter);
 
         checkpermissions();
 
@@ -121,7 +171,7 @@ arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
 
         }else{
 
-          //  renderimage();
+            renderimage();
 
         }
 
@@ -140,7 +190,7 @@ arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
                    try {
 
                      ProcessCameraProvider processCameraProvider= val.get();
-                     preview = new Preview.Builder().setTargetResolution(new Size(900,1200)).build();
+                     preview = new Preview.Builder().setTargetResolution(new Size(900,1900)).build();
 
 //                  ImageAnalysis imageAnalysis =   new ImageAnalysis.Builder().build();
 //                    imageAnalysis.setAnalyzer(getMainExecutor(),new BaseImage());
@@ -150,7 +200,7 @@ arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
                        preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
           ImageCapture imageCapture =   new ImageCapture.Builder().setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY).build();
-                   ImageAnalysis imageAnalysis1 =   new  ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).setTargetResolution(new Size(900,1200)).build();
+                   ImageAnalysis imageAnalysis1 =   new  ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).setTargetResolution(new Size(900,1900)).build();
                    imageAnalysis1.setAnalyzer(ContextCompat.getMainExecutor(MainActivity.this),new BaseImage(MainActivity.this,textToSpeech,view,findViewById(R.id.textView3)));
                        processCameraProvider.unbindAll();
 
@@ -173,8 +223,27 @@ arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
         if(requestCode == 2000 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
             Toast.makeText(this,"Granted permission",Toast.LENGTH_LONG).show();
+
+           checkforaudiopermission();
+          //  renderimage();
+
+        }else if(requestCode == 5000 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
             renderimage();
 
+        }
+
+
+    }
+
+    private void checkforaudiopermission() {
+
+        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},5000);
+
+        }else{
+            renderimage();
         }
 
 
@@ -195,17 +264,15 @@ arrayList = (ArrayList<Jobs>) getIntent().getSerializableExtra("questions");
 
             }
 
-        }
-        else if(view.getId() == R.id.sr){
+        }else if(view.getId() == R.id.next){
 
-Intent intent = new Intent(this, Allrecodings.class);
-startActivity(intent);
+            if(value < counter) {
+                textToSpeech.speak(arrayList.get(value).getDescription(), TextToSpeech.QUEUE_ADD, null, null);
+                value++;
+            }else{
+                textToSpeech.speak("Interview finished wait for new questions good luck", TextToSpeech.QUEUE_ADD, null, null);
 
-        } else if(view.getId() == R.id.next){
-
-            textToSpeech.speak(arrayList.get(value).getDescription(),TextToSpeech.QUEUE_ADD,null,null);
-value++;
-
+            }
         }
         else if(view.getId() == R.id.aa){
 int repeat = value-1;
@@ -217,26 +284,55 @@ int repeat = value-1;
     }
 
     private void stoprecording() {
-        floatingActionButton.setImageResource(R.drawable.ic_baseline_mic_24);
-        if(button.getVisibility() == View.INVISIBLE){
+        floatingActionButton.setImageResource(R.drawable.ic_baseline_play_arrow_24);
 
-            button.setVisibility(View.VISIBLE);
+
+
+        chronometer.stop();
+
+        try{
+
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+            AlertDialog.Builder al = new AlertDialog.Builder(this);
+               al.setTitle("Recording finished");
+               al.setMessage("Click ok to listen!");
+               al.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                       Intent intent = new Intent(MainActivity.this, Allrecodings.class);
+                       startActivity(intent);
+
+
+                   }
+               });
+
+               al.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+                       dialogInterface.cancel();
+                   }
+               });
+
+               AlertDialog alertDialog = al.create();
+               alertDialog.show();
+
+        }catch(Exception e){
 
         }
-        mediaRecorder.stop();
-        mediaRecorder.release();
-        mediaRecorder = null;
       //  butt.setVisibility(View.VISIBLE);
 
     }
 
     private void startrecording(){
 
-        if(button.getVisibility() == View.VISIBLE){
 
-            button.setVisibility(View.INVISIBLE);
 
-        }
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
 
         Date date = new Date();
        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(("HH:mm:ss"));
@@ -248,7 +344,7 @@ int repeat = value-1;
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mediaRecorder.setOutputFile(file1);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        floatingActionButton.setImageResource(R.drawable.ic_baseline_record_voice_over_24);
+        floatingActionButton.setImageResource(R.drawable.ic_baseline_pause_24);
        try{
            mediaRecorder.prepare();
 
@@ -259,20 +355,14 @@ e.printStackTrace();
 
     }
 
-    class  Speakerthread extends Thread{
+    class  Speakerthread extends Thread  {
 
         @Override
         public void run() {
 
+
             textToSpeech.speak(arrayList.get(value).getDescription(),TextToSpeech.QUEUE_ADD,null,null);
             value++;
-            try {
-                Thread.sleep(3000);
-                renderimage();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
         }
     }

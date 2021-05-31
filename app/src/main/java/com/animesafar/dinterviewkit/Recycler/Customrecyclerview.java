@@ -1,6 +1,7 @@
 package com.animesafar.dinterviewkit.Recycler;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,9 @@ this.send = s;
 
         holder.getTextView1().setText(arrayList.get(position).getTitle());
         holder.getTextview2().setText(arrayList.get(position).getDescription());
+
+        holder.getTextView1().setTextColor(Color.BLACK);
+        holder.getTextview2().setTextColor(Color.BLACK);
 
         holder.getfloatingActionButton().setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,8 +4,15 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.Camera.any" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="false" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
@@ -15,22 +22,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dinterviewkit">
-        <activity android:name=".Chooseractivity"></activity>
-        <activity android:name=".datapackage.Allrecodings" />
-        <activity android:name=".Questionslist" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Poseactivity"></activity>
+        <activity android:name=".CustomQuestions" />
+        <activity
+            android:name=".Chooseractivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".datapackage.Allrecodings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Questionslist"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="face" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8549163288628134~6914113708" />
 
-        <activity android:name=".Landingpage">
+        <activity
+            android:name=".Landingpage"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".Notibroadcast">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

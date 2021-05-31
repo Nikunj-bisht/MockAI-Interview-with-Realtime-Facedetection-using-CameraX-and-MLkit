@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/conlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,80 +20,84 @@
         <androidx.camera.view.PreviewView
             android:id="@+id/pv"
             android:layout_width="match_parent"
-            android:layout_height="520dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent">
 
         </androidx.camera.view.PreviewView>
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#F3E6E6"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/chrono"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/next"
+        android:layout_width="55dp"
+        android:layout_height="43dp"
+        android:layout_gravity="right|center_vertical"
+        android:background="@drawable/ic_baseline_next_plan_24"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="378dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Chronometer
+        android:id="@+id/chrono"
+        android:layout_width="137dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="149dp"
+        android:layout_marginEnd="148dp"
+        android:gravity="center|center_horizontal"
+        android:textColor="#EFEAEA"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton2"
+        app:layout_constraintEnd_toEndOf="@+id/conlay"
+        app:layout_constraintStart_toStartOf="@+id/conlay"></Chronometer>
+
+    <ImageButton
+        android:id="@+id/aa"
+        android:layout_width="50dp"
+        android:layout_height="39dp"
+        android:background="@drawable/ic_baseline_replay_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="177dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="60dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="146dp"
+        android:layout_marginEnd="149dp"
         android:clickable="true"
         android:foregroundGravity="center"
+
         android:scaleType="center"
         app:backgroundTint="#673AB7"
         app:barrierMargin="7dp"
         app:fabCustomSize="60dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_mic_24" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="234dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="60dp"
-        android:gravity="center"
-        android:text="Face activity"
-        android:textColor="#FAF3F3"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton2"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/sr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="25dp"
-        android:text="Show reco."
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/floatingActionButton2" />
-
-    <Button
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="23dp"
-        android:text="Next ques"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/aa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="27dp"
-        android:text="Ask again"
-        app:layout_constraintBottom_toTopOf="@+id/next"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintEnd_toEndOf="@+id/conlay"
+        app:layout_constraintStart_toStartOf="@+id/conlay"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

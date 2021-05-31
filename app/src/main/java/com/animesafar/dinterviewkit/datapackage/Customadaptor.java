@@ -1,6 +1,7 @@
 package com.animesafar.dinterviewkit.datapackage;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,9 @@ layoutInflater= LayoutInflater.from(context);
 
         return 0;
 
+// app id   ca-app-pub-8549163288628134~6914113708
 
+ //  banner id     ca-app-pub-8549163288628134/6530970324
 
  }
 
@@ -64,6 +67,7 @@ layoutInflater= LayoutInflater.from(context);
 
         TextView textView = view.findViewById(R.id.textView);
         textView.setText(arrayList.get(i).getDescription());
+        textView.setTextColor(Color.BLACK);
         FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton);
 
 

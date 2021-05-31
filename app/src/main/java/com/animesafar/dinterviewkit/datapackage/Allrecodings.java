@@ -28,7 +28,7 @@ ListView listView;
         arrayList = new ArrayList<>();
         Activity activity = this;
         File file = activity.getExternalFilesDir("Recordings");
-
+mediaPlayer = new MediaPlayer();
          File[] files = file.listFiles();
 
          for(int i=0;i<files.length;i++){
@@ -43,8 +43,21 @@ listView.setAdapter(recodingsadaptor);
 
     @Override
     public void onselected(int pos) {
-        mediaPlayer = new MediaPlayer();
-try {
+
+
+if(mediaPlayer.isPlaying()){
+    mediaPlayer.stop();
+           mediaPlayer = new MediaPlayer();
+
+
+
+        }else{
+    mediaPlayer = new MediaPlayer();
+
+}
+
+
+        try {
     mediaPlayer.setDataSource(arrayList.get(pos).getAbsolutePath());
     mediaPlayer.prepare();
     mediaPlayer.start();

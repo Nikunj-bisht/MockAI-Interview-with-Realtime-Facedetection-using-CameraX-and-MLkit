@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/guide"
+        android:title="Guide"
+        >
+
+    </item>
+    <item android:title="setCustom"
+        android:id="@+id/cq"
+        app:showAsAction="always">
+
+    </item>
+
+
+    <item android:title="Pose"
+        android:id="@+id/posee"
+        app:showAsAction="always">
+
+    </item>
+
+<item android:id="@+id/feedback"
+    android:title="Feedback">
+
+</item>
+</menu>
