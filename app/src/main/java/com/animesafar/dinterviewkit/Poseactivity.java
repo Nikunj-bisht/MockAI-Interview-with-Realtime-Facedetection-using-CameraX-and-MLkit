@@ -16,6 +16,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Size;
+import android.widget.RelativeLayout;
 
 import com.animesafar.dinterviewkit.posepack.PoseAnalyzer;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -28,7 +29,7 @@ public class Poseactivity extends AppCompatActivity {
     Preview preview;
     PreviewView previewView;
 Camera camera;
-
+RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,7 @@ Camera camera;
 
 
          previewView = findViewById(R.id.poose);
-
+relativeLayout = findViewById(R.id.relpose);
     getpermission();
 
     }
@@ -77,7 +78,7 @@ ActivityCompat.requestPermissions(this , new String[]{Manifest.permission.CAMERA
    try{
 
        ProcessCameraProvider processCameraProvider = listenableFuture.get();
-       preview = new Preview.Builder().setTargetResolution(new Size(600,600)).build();
+       preview = new Preview.Builder().setTargetResolution(new Size(900,1700)).build();
        CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build();
        preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
@@ -89,10 +90,10 @@ ActivityCompat.requestPermissions(this , new String[]{Manifest.permission.CAMERA
 
        ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-               .setTargetResolution(new Size(600,600))
+               .setTargetResolution(new Size(900,1700))
                .build();
 
-       imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(Poseactivity.this),new PoseAnalyzer(Poseactivity.this));
+       imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(Poseactivity.this),new PoseAnalyzer(Poseactivity.this,relativeLayout));
        processCameraProvider.unbindAll();
 
        camera = processCameraProvider.bindToLifecycle(Poseactivity.this,cameraSelector,preview,imageCapture,imageAnalysis);

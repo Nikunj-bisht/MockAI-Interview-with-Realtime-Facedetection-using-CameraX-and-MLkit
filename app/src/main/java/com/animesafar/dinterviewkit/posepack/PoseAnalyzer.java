@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.Image;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.camera.core.ImageAnalysis;
@@ -25,11 +27,11 @@ import java.util.List;
 
 public class PoseAnalyzer implements ImageAnalysis.Analyzer {
 Context context;
-
-public PoseAnalyzer(Context context){
+RelativeLayout relativeLayout;
+public PoseAnalyzer(Context context , RelativeLayout relativeLayout){
 
     this.context = context;
-
+this.relativeLayout = relativeLayout;
 }
 
     @SuppressLint("UnsafeExperimentalUsageError")
@@ -53,13 +55,20 @@ public PoseAnalyzer(Context context){
 
                     public void onSuccess(Pose pose) {
 
-                        List<PoseLandmark> landmarks = pose.getAllPoseLandmarks();
+if(relativeLayout.getChildCount()>1){
+    relativeLayout.removeViewAt(1);
+}
+                  View view =     new Points(pose,true,true,true,null,context);
+                       relativeLayout.addView(view);
+                        Log.d("landnose" , pose.getPoseLandmark(PoseLandmark.NOSE).getPosition().x+" ll");
+                        Log.d("landshoul" , pose.getPoseLandmark(PoseLandmark.RIGHT_SHOULDER).getPosition().x+" ll");
 
-                         PoseLandmark poseLandmark = pose.getPoseLandmark(PoseLandmark.LEFT_SHOULDER);
-                        PoseLandmark poseLandmark2 = pose.getPoseLandmark(PoseLandmark.RIGHT_SHOULDER);
-                        PoseLandmark poseLandmark3 = pose.getPoseLandmark(PoseLandmark.NOSE);
-new Points(context ,poseLandmark3.getPosition().x , poseLandmark3.getPosition().y);
-                        Log.d(" Here--->>>> " , poseLandmark.getPosition()+" "+poseLandmark2.getPosition()+" "+poseLandmark3.getPosition());
+                        //
+//                         PoseLandmark poseLandmark = pose.getPoseLandmark(PoseLandmark.LEFT_SHOULDER);
+//                        PoseLandmark poseLandmark2 = pose.getPoseLandmark(PoseLandmark.RIGHT_SHOULDER);
+//                        PoseLandmark poseLandmark3 = pose.getPoseLandmark(PoseLandmark.NOSE);
+//new Points(context ,poseLandmark3.getPosition().x , poseLandmark3.getPosition().y);
+//                        Log.d(" Here--->>>> " , poseLandmark.getPosition()+" "+poseLandmark2.getPosition()+" "+poseLandmark3.getPosition());
 image.close();
 
                     }
@@ -78,4 +87,11 @@ image.close();
                 });
 
     }
+
+    private void drawpoint(){
+
+
+
+    }
+
 }
