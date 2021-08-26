@@ -44,7 +44,7 @@ public class Landingpage extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Intent intent = new Intent(Landingpage.this,Chooseractivity.class);
+                Intent intent = new Intent(Landingpage.this,Selectionactivity.class);
                 startActivity(intent);
 
             }
@@ -53,7 +53,9 @@ public class Landingpage extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
 
-                Intent intent = new Intent(Landingpage.this,Chooseractivity.class);
+          //      Intent intent = new Intent(Landingpage.this,Chooseractivity.class);
+                Intent intent = new Intent(Landingpage.this,Selectionactivity.class);
+
                 startActivity(intent);
 
             }

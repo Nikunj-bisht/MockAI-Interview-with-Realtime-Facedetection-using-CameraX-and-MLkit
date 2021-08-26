@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.animesafar.dinterviewkit.Recycler.Customrecyclerview;
 import com.animesafar.dinterviewkit.Recycler.Jobs;
+import com.animesafar.dinterviewkit.langiden.Langidentifier;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -273,6 +274,11 @@ startActivity(intent);
         }else if(item.getItemId() == R.id.posee){
 
             Intent intent = new Intent(Chooseractivity.this , Poseactivity.class);
+            startActivity(intent);
+
+
+        }else if(item.getItemId() == R.id.lang){
+            Intent intent = new Intent(this, Langidentifier.class);
             startActivity(intent);
 
 

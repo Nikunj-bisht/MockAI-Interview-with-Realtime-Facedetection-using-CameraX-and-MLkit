@@ -24,4 +24,8 @@
     android:title="Feedback">
 
 </item>
+
+    <item android:id="@+id/lang"
+        android:title="Lang"></item>
+
 </menu>

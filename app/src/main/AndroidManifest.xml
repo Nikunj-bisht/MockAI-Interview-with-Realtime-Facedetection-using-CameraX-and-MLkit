@@ -22,7 +22,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dinterviewkit">
-        <activity android:name=".Poseactivity"></activity>
+        <activity
+            android:name=".Selectionactivity"
+            android:exported="true" />
+        <activity android:name=".langiden.Langidentifier" />
+        <activity android:name=".Poseactivity" />
         <activity android:name=".CustomQuestions" />
         <activity
             android:name=".Chooseractivity"
