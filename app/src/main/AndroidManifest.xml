@@ -21,7 +21,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Dinterviewkit">
+        <activity
+            android:name=".extraactivities.Groupchatactivity"
+            android:exported="true" />
+        <activity
+            android:name=".extraactivities.Ieltsactivity"
+            android:exported="true" />
         <activity
             android:name=".Selectionactivity"
             android:exported="true" />

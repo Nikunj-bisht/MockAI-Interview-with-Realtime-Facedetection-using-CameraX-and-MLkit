@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,8 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import com.animesafar.dinterviewkit.Recycler.callback;
+import com.animesafar.dinterviewkit.extraactivities.Ieltsactivity;
 
-public class Selectionactivity extends AppCompatActivity {
+public class Selectionactivity extends AppCompatActivity implements callback{
 
     private RecyclerView recyclerView;
     private ArrayList<Griddata> arrayList;
@@ -79,7 +83,7 @@ requestQueue.add(jsonObjectRequest);
 
     private void showdata() {
 
-        GridRecycler gridRecycler = new GridRecycler(this,arrayList);
+        GridRecycler gridRecycler = new GridRecycler(this,arrayList,this);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this , 2);
 
@@ -90,4 +94,26 @@ requestQueue.add(jsonObjectRequest);
 
     }
 
+    @Override
+    public void touch(int i) {
+        Toast.makeText(this , "Touched" , Toast.LENGTH_LONG).show();
+        switch (i){
+
+            case 0:
+
+                Intent intent = new Intent(this , Chooseractivity.class);
+                startActivity(intent);
+
+                break;
+
+            case 1:
+
+Intent intent1 = new Intent(this , Ieltsactivity.class);
+startActivity(intent1);
+
+                break;
+
+        }
+
+    }
 }

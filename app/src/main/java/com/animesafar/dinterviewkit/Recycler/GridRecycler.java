@@ -26,11 +26,13 @@ public class GridRecycler extends RecyclerView.Adapter<Gridviewholder> {
     Context context;
     ArrayList<Griddata> arrayList;
     LayoutInflater layoutInflater;
+    callback cll;
 
-    public GridRecycler(Context context , ArrayList<Griddata> arrayList){
+    public GridRecycler(Context context , ArrayList<Griddata> arrayList , callback call){
 
         this.context = context;
         this.arrayList = arrayList;
+        this.cll = call;
         layoutInflater = LayoutInflater.from(context);
 
     }
@@ -51,6 +53,15 @@ public class GridRecycler extends RecyclerView.Adapter<Gridviewholder> {
     public void onBindViewHolder(@NonNull Gridviewholder holder, int position) {
 
         holder.getTextView().setText(arrayList.get(position).getTitle());
+        final int i = position;
+        holder.getImageView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                cll.touch(i);
+
+            }
+        });
         new Pictures(position , holder.getImageView()).start();
 
     }

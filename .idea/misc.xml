@@ -4,8 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/drawable/customforsingle.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/grad.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/drawable/grad2.xml" value="0.2861111111111111" />
+        <entry key="app/src/main/res/drawable/type.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/layout/activity_groupchatactivity.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_ieltsactivity.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selectionactivity.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/customforact.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/gridview.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/singlemessage.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/menu/guide.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/menu/ieltsmenu.xml" value="0.35572916666666665" />
       </map>
     </option>
   </component>

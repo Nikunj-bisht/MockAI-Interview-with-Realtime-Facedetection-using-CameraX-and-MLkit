@@ -13,11 +13,14 @@ public class Gridviewholder extends RecyclerView.ViewHolder {
 
 private TextView textView;
 private ImageView imageView;
+private View view;
 
 public Gridviewholder(@NonNull View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.textView9);
         imageView = itemView.findViewById(R.id.imageView);
+        this.view = itemView;
+
     }
 
     public TextView getTextView() {
@@ -35,4 +38,7 @@ public Gridviewholder(@NonNull View itemView) {
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
     }
+
+    public View getView() { return this.view ;}
+
 }
