@@ -27,14 +27,20 @@ public class Requestclassforextraactivity {
                     JSONArray jsonArray = response.getJSONArray("data");
                     ArrayList<Datafortopics> arrayList = new ArrayList<>();
                     for(int i=0;i<jsonArray.length();i++){
-                        String topic = jsonArray.getJSONObject(i).getString("title");
+                        try{
+                            String topic = jsonArray.getJSONObject(i).getString("title");
 
-                        String code = jsonArray.getJSONObject(i).getString("Code");
-                        arrayList.add(new Datafortopics(topic , code));
+                            String code = jsonArray.getJSONObject(i).getString("Code");
+                            arrayList.add(new Datafortopics(topic , code));
+                        }catch (Exception e){
 
-                        fun.vollycallback(arrayList);
+                        }
+
+
 
                     }
+                    fun.vollycallback(arrayList);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

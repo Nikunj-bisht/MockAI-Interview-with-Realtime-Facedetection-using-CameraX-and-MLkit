@@ -8,9 +8,11 @@
         <entry key="app/src/main/res/drawable/grad.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/drawable/grad2.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/drawable/type.xml" value="0.2833333333333333" />
+        <entry key="app/src/main/res/layout/actionedit.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_groupchatactivity.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_ieltsactivity.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_selectionactivity.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/addalert.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/customforact.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/gridview.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/singlemessage.xml" value="0.35572916666666665" />

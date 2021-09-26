@@ -1,6 +1,8 @@
 package com.animesafar.dinterviewkit.extraactivities;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,10 @@ this.layoutInflater = LayoutInflater.from(context);
     @Override
     public void onBindViewHolder(@NonNull Customviewholderforchat holder, int position) {
 
+//holder.getTextView().setGravity(Gravity.RIGHT);
+//holder.getTextView2().setGravity(Gravity.RIGHT);
         holder.getTextView2().setText(messages.get(position).getMessage());
+        holder.getTextView().setText(messages.get(position).getUser());
 
     }
 

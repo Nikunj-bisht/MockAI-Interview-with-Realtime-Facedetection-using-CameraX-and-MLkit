@@ -25,7 +25,8 @@
         android:theme="@style/Theme.Dinterviewkit">
         <activity
             android:name=".extraactivities.Groupchatactivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".extraactivities.Ieltsactivity"
             android:exported="true" />

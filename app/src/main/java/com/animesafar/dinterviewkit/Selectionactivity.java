@@ -45,6 +45,7 @@ public class Selectionactivity extends AppCompatActivity implements callback{
 
     }
 
+
     private void fetchtasks(){
 String url = "https://safetyapiforw.herokuapp.com/tasks";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
