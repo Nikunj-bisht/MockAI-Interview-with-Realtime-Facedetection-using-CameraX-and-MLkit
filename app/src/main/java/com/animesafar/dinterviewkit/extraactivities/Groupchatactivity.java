@@ -65,11 +65,13 @@ TextView textView;
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.actionedit,null);
         textView = view.findViewById(R.id.textView14);
-        actionBar.setCustomView(view);
+      //  actionBar.setCustomView(view);
 
         try {
             room_name = getIntent().getStringExtra("room");
-            socket = IO.socket("https://interprac.herokuapp.com");
+            IO.Options options = new IO.Options();
+            options.path = "/chat";
+            socket = IO.socket("https://interprac.herokuapp.com",options);
             socket.connect();
             eventsforsocket();
             JSONObject jsonObject = new JSONObject();

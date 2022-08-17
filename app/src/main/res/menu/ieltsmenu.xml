@@ -9,5 +9,12 @@ android:title="Addnew"
 
     </item>
 
+    <item android:icon="@drawable/ic_baseline_search_24"
+        android:title="search"
+        app:showAsAction="always"
+        android:id="@+id/findroom">
+
+    </item>
+
 
 </menu>

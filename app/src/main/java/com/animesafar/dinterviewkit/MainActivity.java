@@ -200,7 +200,9 @@ Toast.makeText(getApplicationContext(),"Cl",Toast.LENGTH_LONG).show();
                        preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
           ImageCapture imageCapture =   new ImageCapture.Builder().setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY).build();
-                   ImageAnalysis imageAnalysis1 =   new  ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).setTargetResolution(new Size(900,1900)).build();
+                   ImageAnalysis imageAnalysis1 =   new  ImageAnalysis.Builder().setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                           .setTargetResolution(new Size(900,1900)).build();
+
                    imageAnalysis1.setAnalyzer(ContextCompat.getMainExecutor(MainActivity.this),new BaseImage(MainActivity.this,textToSpeech,view,findViewById(R.id.textView3)));
                        processCameraProvider.unbindAll();
 

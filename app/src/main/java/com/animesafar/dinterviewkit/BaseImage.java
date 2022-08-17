@@ -33,7 +33,7 @@ import java.util.List;
 public class BaseImage implements ImageAnalysis.Analyzer {
 
     FirebaseVisionFaceDetector firebaseVisionFaceDetector;
-//
+    //
 //           FirebaseVisionFaceDetectorOptions.ContourMod
 //
 //    FirebaseVision
@@ -42,64 +42,60 @@ public class BaseImage implements ImageAnalysis.Analyzer {
     boolean speakornot = true;
     boolean eyesopened = true;
     boolean right = true;
-    boolean down =  true;
+    boolean down = true;
     boolean left = true;
     boolean smile = true;
     RelativeLayout rootview;
     TextView textView;
 
-public BaseImage(Context context,TextToSpeech textToSpeech,RelativeLayout view,TextView textView){
+    public BaseImage(Context context, TextToSpeech textToSpeech, RelativeLayout view, TextView textView) {
 
-    this.context = context;
-this.textToSpeech = textToSpeech;
-this.rootview = view;
-this.textView = textView;
-}
+        this.context = context;
+        this.textToSpeech = textToSpeech;
+        this.rootview = view;
+        this.textView = textView;
+    }
 
 
     @SuppressLint("UnsafeExperimentalUsageError")
     @Override
     public void analyze(@NonNull ImageProxy image) {
 
-       Image n =  image.getImage();
-      //  Log.d("RAn analyzer ------------------->>>>>>>>>>" ,"Ran");
+        Image n = image.getImage();
+        //  Log.d("RAn analyzer ------------------->>>>>>>>>>" ,"Ran");
 
 
-      FirebaseVisionFaceDetectorOptions a =    new FirebaseVisionFaceDetectorOptions.Builder().setPerformanceMode(FirebaseVisionFaceDetectorOptions.FAST)
-.setLandmarkMode(FirebaseVisionFaceDetectorOptions.ALL_LANDMARKS)
-              .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
-              .setMinFaceSize(0.2f)
-              .enableTracking()
+        FirebaseVisionFaceDetectorOptions a = new FirebaseVisionFaceDetectorOptions.Builder().setPerformanceMode(FirebaseVisionFaceDetectorOptions.FAST)
+                .setLandmarkMode(FirebaseVisionFaceDetectorOptions.ALL_LANDMARKS)
+                .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
+                .setMinFaceSize(0.2f)
+                .enableTracking()
 
-              .build();
-
-
-
-      int rotation = image.getImageInfo().getRotationDegrees();
+                .build();
 
 
-
-     FirebaseVisionImage p =  FirebaseVisionImage.fromMediaImage(n, finddegree(rotation));
-
-        FirebaseVisionFaceDetector detector =   FirebaseVision.getInstance().getVisionFaceDetector(a);
+        int rotation = image.getImageInfo().getRotationDegrees();
 
 
+        FirebaseVisionImage p = FirebaseVisionImage.fromMediaImage(n, finddegree(rotation));
+
+        FirebaseVisionFaceDetector detector = FirebaseVision.getInstance().getVisionFaceDetector(a);
 
 
-                detector.detectInImage(p).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionFace>>() {
-          @Override
-          public void onSuccess(List<FirebaseVisionFace> firebaseVisionFaces) {
+        detector.detectInImage(p).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionFace>>() {
+                                                           @Override
+                                                           public void onSuccess(List<FirebaseVisionFace> firebaseVisionFaces) {
 
-            //  Log.d("Got values ------------------->>>>>>>>>>" , firebaseVisionFaces.toString());
+                                                               //  Log.d("Got values ------------------->>>>>>>>>>" , firebaseVisionFaces.toString());
 
-              if(!firebaseVisionFaces.isEmpty()){
+                                                               if (!firebaseVisionFaces.isEmpty()) {
 
-                  textView.setText("Face detected");
+                                                                   textView.setText("Face detected");
 
-                  for(int i=0;i<firebaseVisionFaces.size();i++){
-if(rootview.getChildCount()>1){
-    rootview.removeViewAt(1);
-}
+                                                                   for (int i = 0; i < firebaseVisionFaces.size(); i++) {
+                                                                       if (rootview.getChildCount() > 1) {
+                                                                           rootview.removeViewAt(1);
+                                                                       }
 
 //
 //    if(firebaseVisionFaces.get(i).getHeadEulerAngleY()>20 && right){
@@ -110,33 +106,32 @@ if(rootview.getChildCount()>1){
 //    right = false;
 //    }
 
-    FirebaseVisionFace firebaseVisionFace = firebaseVisionFaces.get(i);
+                                                                       FirebaseVisionFace firebaseVisionFace = firebaseVisionFaces.get(i);
 
-    FirebaseVisionPoint firebaseVisionPoint = firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.NOSE_BASE).getPosition();
-    FirebaseVisionPoint firebaseVisionPoint1 = firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.MOUTH_BOTTOM).getPosition();
+                                                                       FirebaseVisionPoint firebaseVisionPoint = firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.NOSE_BASE).getPosition();
+                                                                       FirebaseVisionPoint firebaseVisionPoint1 = firebaseVisionFace.getLandmark(FirebaseVisionFaceLandmark.MOUTH_BOTTOM).getPosition();
 
-    double x = Math.pow(firebaseVisionPoint1.getX() - firebaseVisionPoint.getX() , 2);
-    double y = Math.pow(firebaseVisionPoint1.getY() - firebaseVisionPoint.getY() , 2);
-
-
-
-   // Log.d("Head down figures------->>>>" ,Math.sqrt(x + y) +" "+ ((0.125) * (firebaseVisionFace.getBoundingBox().width()*1.5)));
-
-      if(Math.sqrt(x + y) < ((0.111) * (firebaseVisionFace.getBoundingBox().width()*1.5))){
-
-             textToSpeech.speak("Dont look down see straight",TextToSpeech.QUEUE_FLUSH,null,null);
-          textView.setText("Looking down");
+                                                                       double x = Math.pow(firebaseVisionPoint1.getX() - firebaseVisionPoint.getX(), 2);
+                                                                       double y = Math.pow(firebaseVisionPoint1.getY() - firebaseVisionPoint.getY(), 2);
 
 
-      }
+                                                                       // Log.d("Head down figures------->>>>" ,Math.sqrt(x + y) +" "+ ((0.125) * (firebaseVisionFace.getBoundingBox().width()*1.5)));
+
+                                                                       if (Math.sqrt(x + y) < ((0.111) * (firebaseVisionFace.getBoundingBox().width() * 1.5))) {
+
+                                                                           textToSpeech.speak("Dont look down see straight", TextToSpeech.QUEUE_FLUSH, null, null);
+                                                                           textView.setText("Looking down");
 
 
-    if(firebaseVisionFace.getHeadEulerAngleY() < -20 || firebaseVisionFace.getHeadEulerAngleY() >20){
-        textView.setText("look straight");
+                                                                       }
 
-        // left = false;
 
-    }
+                                                                       if (firebaseVisionFace.getHeadEulerAngleY() < -20 || firebaseVisionFace.getHeadEulerAngleY() > 20) {
+                                                                           textView.setText("look straight");
+
+                                                                           // left = false;
+
+                                                                       }
 
 //    if(firebaseVisionFace.getHeadEulerAngleZ() > 4){
 //
@@ -147,18 +142,18 @@ if(rootview.getChildCount()>1){
 //
 //
 //    }
-    if(firebaseVisionFace.getSmilingProbability()>0.6){
+                                                                       if (firebaseVisionFace.getSmilingProbability() > 0.6) {
 
-        textView.setText("Happy face");
-       // textToSpeech.speak("dont laugh too much",TextToSpeech.QUEUE_FLUSH,null,null);
+                                                                           textView.setText("Happy face");
+                                                                           // textToSpeech.speak("dont laugh too much",TextToSpeech.QUEUE_FLUSH,null,null);
 
 //        smile = false;
-    }
+                                                                       }
 
 
-    View view1 =  new Drawlayeraroundface(context,firebaseVisionFace.getBoundingBox());
-rootview.addView(view1);
-   /*  This is part of project added functionality of textToSpeech*/
+                                                                       View view1 = new Drawlayeraroundface(context, firebaseVisionFace.getBoundingBox());
+                                                                       rootview.addView(view1);
+                                                                       /*  This is part of project added functionality of textToSpeech*/
 
 //    Log.d("Got values ------------------->>>>>>>>>>" , firebaseVisionFaces.get(i).toString());
 //boolean stm = true;
@@ -186,36 +181,36 @@ rootview.addView(view1);
 //
 //Toast.makeText(context,"Detected",Toast.LENGTH_LONG).show();
 
-}
+                                                                   }
 
 
-              }else{
-                  if(rootview.getChildCount()>1){
-                      rootview.removeViewAt(1);
-                  }
+                                                               } else {
+                                                                   if (rootview.getChildCount() > 1) {
+                                                                       rootview.removeViewAt(1);
+                                                                   }
 
 
-                  textView.setText("Face Not detected");
+                                                                   textView.setText("Face Not detected");
 
-                 // Toast.makeText(context,"Not Detected",Toast.LENGTH_LONG).show();
+                                                                   // Toast.makeText(context,"Not Detected",Toast.LENGTH_LONG).show();
 
-              }
+                                                               }
 
-              image.close();
+                                                               image.close();
 
 
-          }
+                                                           }
 
-                }
-      ).addOnFailureListener(new OnFailureListener() {
-          @Override
-          public void onFailure(@NonNull Exception e) {
-              Toast.makeText(context,"Not Detected",Toast.LENGTH_LONG).show();
-              image.close();
+                                                       }
+        ).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Not Detected", Toast.LENGTH_LONG).show();
+                image.close();
 
-          }
+            }
 
-                });
+        });
 
 
     }
@@ -223,28 +218,28 @@ rootview.addView(view1);
     private int finddegree(int rotation) {
         int result;
 
-        switch (rotation){
-        case 0 :
+        switch (rotation) {
+            case 0:
 
-            result  = FirebaseVisionImageMetadata.ROTATION_0;
-        break;
-        case 90 :
+                result = FirebaseVisionImageMetadata.ROTATION_0;
+                break;
+            case 90:
 
-            result  = FirebaseVisionImageMetadata.ROTATION_90;
-            break;
-        case 180 :
+                result = FirebaseVisionImageMetadata.ROTATION_90;
+                break;
+            case 180:
 
-            result  = FirebaseVisionImageMetadata.ROTATION_180;
-            break;
-        case 270 :
+                result = FirebaseVisionImageMetadata.ROTATION_180;
+                break;
+            case 270:
 
-            result  = FirebaseVisionImageMetadata.ROTATION_270;
-            break;
+                result = FirebaseVisionImageMetadata.ROTATION_270;
+                break;
 
             default:
                 result = FirebaseVisionImageMetadata.ROTATION_0;
-    }
-        return  result;
+        }
+        return result;
 
     }
 //
@@ -254,7 +249,6 @@ rootview.addView(view1);
 //
 //
 //    }
-
 
 
 }

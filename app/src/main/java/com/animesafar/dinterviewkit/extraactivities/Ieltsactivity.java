@@ -5,20 +5,26 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.animesafar.dinterviewkit.R;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -42,13 +48,19 @@ public class Ieltsactivity extends AppCompatActivity implements gotochatinterfac
 
     private RecyclerView recyclerView;
   private   AlertDialog.Builder alert;
-   private AlertDialog dialog;
+   private AlertDialog dialog ;
+   private SwipeRefreshLayout s;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ieltsactivity);
 
+    alert = new AlertDialog.Builder(this);
+        s = findViewById(R.id.swipe);
+
         recyclerView = findViewById(R.id.recact);
+
         fetchalltopics();
 
     }
@@ -62,8 +74,12 @@ public class Ieltsactivity extends AppCompatActivity implements gotochatinterfac
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Ieltsactivity.this);
                 recyclerView.setAdapter(new Recyclerforactivities(Ieltsactivity.this , arrayList , Ieltsactivity.this));
-                 recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setLayoutManager(linearLayoutManager);
+s.setOnRefreshListener(()->{
 
+    fetchalltopics();
+    s.setRefreshing(false);
+});
             }
         });
 
@@ -110,6 +126,23 @@ progressBar.setVisibility(View.VISIBLE);
             dialog.show();
 
         }
+        else if(item.getItemId() == R.id.findroom){
+View view = getLayoutInflater().inflate(R.layout.findalert,null);
+EditText editText = view.findViewById(R.id.rm);
+            Button button = view.findViewById(R.id.button6);
+            button.setOnClickListener((View v)->{
+                String typed_text = editText.getText().toString();
+                if(typed_text!=null){
+                    findtherooms(typed_text);
+                }
+            });
+alert.setView(view);
+
+            dialog = alert.create();
+            dialog.show();
+
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -119,17 +152,7 @@ progressBar.setVisibility(View.VISIBLE);
         HashMap<String, String> map = new HashMap<>();
         map.put("tit",t);
         map.put("code",c);
-
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("https://interprac.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create());
-
-        Retrofit retrofit = builder.build();
-                Topic topic = retrofit.create(Topic.class);
-
-
-        topic.uploadtitle(map)
+        Retrobuilder.getbuilder().uploadtitle(map)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .flatMap(new Function<ResponseBody, ObservableSource<ResponseBody>>() {
@@ -160,23 +183,49 @@ progressBar.setVisibility(View.VISIBLE);
 
             }
         });
-//
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                System.out.println(response.body().toString());
-//                Toast.makeText(Ieltsactivity.this,"Topic created",Toast.LENGTH_LONG).show();
-//                dialog.dismiss();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Toast.makeText(Ieltsactivity.this,"Error try again!",Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
-
 
 
     }
+
+    private void findtherooms(String typed){
+
+        HashMap<String,String> map = new HashMap<>();
+        map.put("typed" , typed);
+        Retrobuilder.getbuilder().getsearchrooms(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new Function<List<Topicsdata>, ObservableSource<Topicsdata>>() {
+                    @Override
+                    public ObservableSource<Topicsdata> apply(List<Topicsdata> topicsdata) throws Throwable {
+                        Toast.makeText(Ieltsactivity.this,topicsdata.toString(),Toast.LENGTH_LONG).show();
+
+
+                        return null;
+                    }
+
+                }).subscribe(new Observer<Topicsdata>() {
+            @Override
+            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@io.reactivex.rxjava3.annotations.NonNull Topicsdata topicsdata) {
+
+            }
+
+            @Override
+            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                Toast.makeText(Ieltsactivity.this,"error",Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+
 }

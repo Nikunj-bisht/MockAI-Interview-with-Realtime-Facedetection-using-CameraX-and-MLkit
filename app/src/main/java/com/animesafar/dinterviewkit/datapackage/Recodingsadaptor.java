@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.animesafar.dinterviewkit.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class Recodingsadaptor extends BaseAdapter {
     public  interface selected{
 
         void onselected(int pos);
+        void onDelete(int pos);
 
     }
 
@@ -33,7 +35,7 @@ public class Recodingsadaptor extends BaseAdapter {
         this.context = context;
         this.arrayList = arrayList;
         layoutInflater = LayoutInflater.from(context);
-this.sele = s;
+        this.sele = s;
     }
     @Override
     public int getCount() {
@@ -58,16 +60,23 @@ this.sele = s;
         TextView textView = view1.findViewById(R.id.textView2);
         textView.setText(arrayList.get(i).getName());
 
-        Button button = view1.findViewById(R.id.button);
-
+        FloatingActionButton button = view1.findViewById(R.id.button);
+        FloatingActionButton deleteButton = view1.findViewById(R.id.deleteAudio);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-button.setBackgroundColor(Color.GREEN);
                 sele.onselected(i);
 
             }
         });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sele.onDelete(i);
+            }
+        });
+
 
         return view1;
     }

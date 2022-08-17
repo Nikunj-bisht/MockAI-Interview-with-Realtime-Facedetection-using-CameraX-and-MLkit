@@ -1,6 +1,7 @@
 package com.animesafar.dinterviewkit.extraactivities;
 
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -20,6 +21,9 @@ public interface Topic {
      @POST("/save")
     Observable<ResponseBody> uploadtitle(@FieldMap Map<String, String> map);
 
+    @FormUrlEncoded
+    @POST("/getsearch")
+    Observable<List<Topicsdata>> getsearchrooms(@FieldMap Map<String,String> map);
 
 
 }

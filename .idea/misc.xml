@@ -9,15 +9,31 @@
         <entry key="app/src/main/res/drawable/grad2.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/drawable/type.xml" value="0.2833333333333333" />
         <entry key="app/src/main/res/layout/actionedit.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_all_gd_rooms.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_allrecodings.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/activity_group_discussion.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_group_discussion2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_groupchatactivity.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_ieltsactivity.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_landingpage.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_selectionactivity.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/addalert.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/cards.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/customforact.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/customrecorderview.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/customsingleview.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/findalert.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/gridview.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/joinroombottomsheet.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/playaudio.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/ppdtlist.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/singlemessage.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/writingbox.xml" value="0.34974358974358977" />
+        <entry key="app/src/main/res/menu/gdmenu.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/menu/guide.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/menu/ieltsmenu.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.25052083333333336" />
       </map>
     </option>
   </component>

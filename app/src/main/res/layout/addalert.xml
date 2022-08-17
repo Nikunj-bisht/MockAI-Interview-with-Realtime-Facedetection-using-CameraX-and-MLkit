@@ -5,40 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/rt"
-        android:layout_width="297dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/customforsingle"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter Room title.."
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/rc"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="clip_horizontal|center|center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/rc"
-        android:layout_width="298dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="54dp"
-        android:background="@drawable/customforsingle"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter Room code.."
-        android:inputType="textPersonName"
+        <EditText
+            android:id="@+id/rt"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/customforsingle"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Enter Room title.."
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rt" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <EditText
+            android:id="@+id/rc"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/customforsingle"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Enter Room code.."
+            android:inputType="textPersonName" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar4"
@@ -46,27 +55,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="467dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rc"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="160dp"
-        android:text="Add"
+        android:gravity="clip_horizontal|center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rc"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar4">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:text="Add" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

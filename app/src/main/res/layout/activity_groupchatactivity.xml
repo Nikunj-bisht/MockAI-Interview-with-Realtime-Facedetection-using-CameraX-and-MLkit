@@ -10,39 +10,46 @@
         android:id="@+id/chatrecycle"
         android:layout_width="match_parent"
         android:layout_height="669dp"
-        app:layout_constraintBottom_toTopOf="@+id/floa"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <EditText
-        android:id="@+id/messaget"
-        android:layout_width="324dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/type"
-        android:ems="10"
-        android:hint="Type message.."
-        android:inputType="textMultiLine"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/floa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatrecycle" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floa"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="11dp"
-        android:clickable="true"
-        app:backgroundTint="#30BA35"
+        android:layout_marginBottom="3dp"
+        android:gravity="bottom|center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/messaget"
-        app:layout_constraintTop_toBottomOf="@+id/chatrecycle"
-        app:srcCompat="@drawable/ic_baseline_arrow_upward_24" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <EditText
+            android:id="@+id/messaget"
+            android:layout_width="279dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/type"
+            android:ems="10"
+            android:hint="Type message.."
+            android:inputType="textMultiLine"
+            android:padding="5dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="11dp"
+            android:clickable="true"
+            app:backgroundTint="#30BA35"
+            app:srcCompat="@drawable/ic_baseline_arrow_upward_24"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
